@@ -6,14 +6,18 @@ version: "1.0.0"
 date-released: "2026-03-18"
 license: MIT
 authors:
-  - name: "DDI-E authors"
+  - family-names: "Liu"
+    given-names: "Qing"
+    orcid: "https://orcid.org/0009-0006-6345-2997"
 # NOTE:
 # After paper publication, please update the preferred citation (journal, volume/issue, DOI).
 preferred-citation:
   type: article
   title: "DDI-E: A Conditional Diffusion Model for Probabilistic Reconstruction of Electrical Time Series under Random Missing Data"
   authors:
-    - name: "DDI-E authors"
+    - family-names: "Liu"
+      given-names: "Qing"
+      orcid: "https://orcid.org/0009-0006-6345-2997"
   year: 2026
   journal: "TBD"
   doi: "TBD"

@@ -90,6 +90,10 @@ DDIE_v1.0/
 
 See `CITATION.cff`.
 
+## Author
+
+Qing Liu (ORCID: `https://orcid.org/0009-0006-6345-2997`)
+
 ## License
 
 MIT License. See `LICENSE`.
