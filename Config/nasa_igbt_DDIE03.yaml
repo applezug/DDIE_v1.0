@@ -1,0 +1,97 @@
+# DDI-E NASA IGBT - DDIE-03 实验专用配置
+# 数据：Data/datasets/NASA IGBT/Data/SMU Data for new devices
+# 测试集使用训练集 global_min/max 归一化（与 20260205 报告一致）
+
+model:
+  target: Models.ddie.ddie_model.DDI_E
+  params:
+    seq_length: 128
+    feature_size: 1
+    n_layer_enc: 4
+    n_layer_dec: 2
+    d_model: 128
+    timesteps: 1000
+    sampling_timesteps: 200
+    loss_type: 'l1'
+    beta_schedule: 'cosine'
+    n_heads: 8
+    mlp_hidden_times: 4
+    attn_pd: 0.0
+    resid_pd: 0.0
+    kernel_size: 1
+    padding_size: 0
+    use_mask_condition: true
+    freq_loss_weight: 0.1
+    use_trend_cycle: false
+
+solver:
+  base_lr: 1.0e-4
+  max_epochs: 200
+  results_folder: ./Checkpoints_ddie_igbt_DDIE03
+  gradient_accumulate_every: 1
+  save_cycle: 50
+  early_stop_patience: 20
+  ema:
+    decay: 0.999
+    update_interval: 5
+  scheduler:
+    target: engine.lr_sch.ReduceLROnPlateauWithWarmup
+    params:
+      factor: 0.5
+      patience: 20
+      min_lr: 1.0e-6
+      threshold: 1.0e-2
+      threshold_mode: rel
+      warmup_lr: 1.0e-4
+      warmup: 100
+      verbose: False
+
+dataloader:
+  train_dataset:
+    target: Utils.Data_utils.nasa_igbt_dataset.NASAIGBTDataset
+    params:
+      data_root: ./Data/datasets/NASA IGBT/Data/SMU Data for new devices
+      device_ids: ['IGBT-IRG4BC30K', 'MOSFET-IRF520Npbf']
+      window: 128
+      seed: 42
+      period: train
+      val_ratio: 0.2
+      test_device_ids: ['MOSFET-IRF520Npbf']
+      neg_one_to_one: true
+
+  val_dataset:
+    target: Utils.Data_utils.nasa_igbt_dataset.NASAIGBTDataset
+    params:
+      data_root: ./Data/datasets/NASA IGBT/Data/SMU Data for new devices
+      device_ids: ['IGBT-IRG4BC30K', 'MOSFET-IRF520Npbf']
+      window: 128
+      seed: 42
+      period: val
+      val_ratio: 0.2
+      test_device_ids: ['MOSFET-IRF520Npbf']
+      neg_one_to_one: true
+
+  test_dataset:
+    target: Utils.Data_utils.nasa_igbt_dataset.NASAIGBTDataset
+    params:
+      data_root: ./Data/datasets/NASA IGBT/Data/SMU Data for new devices
+      device_ids: ['IGBT-IRG4BC30K', 'MOSFET-IRF520Npbf']
+      window: 128
+      seed: 42
+      period: test
+      test_device_ids: ['MOSFET-IRF520Npbf']
+      neg_one_to_one: true
+
+  batch_size: 8
+  shuffle: true
+  num_workers: 0
+  drop_last: false
+  pin_memory: true
+
+experiment:
+  missing_rates: [0.1, 0.3, 0.5, 0.7, 0.9]
+  n_masks_per_sample: 5
+  seeds: [42, 123, 2024]
+  eval_batch_size: 8
+  uncertainty_samples: 20
+  report_original_scale: true

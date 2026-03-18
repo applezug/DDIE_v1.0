@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+env/
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Project: raw data (readers download separately)
+Data/datasets/nasa_battery/*.mat
+Data/datasets/nasa_battery/NASA Battery Data Set/
+Data/datasets/NASA IGBT/
+
+# Repo should not ship datasets (but keep placeholders)
+Data/datasets/**
+!Data/datasets/.gitkeep
+!Data/datasets/README.md
+
+# Experiment artifacts (keep repo minimal)
+results*/
+reports*/
+Checkpoints_*/
+log/
+figures/
+
+# Optional: exclude run outputs to keep repo small (uncomment if needed)
+# results_DDIE03/
+# Checkpoints_ddie_nasa_DDIE03/
+# Checkpoints_ddie_igbt_DDIE03/
+# REPORTS/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Logs
+*.log
+logs/

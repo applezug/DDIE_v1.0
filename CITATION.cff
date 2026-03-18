@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the associated paper."
+title: "DDIE v1.0"
+type: software
+version: "1.0.0"
+date-released: "2026-03-18"
+license: MIT
+authors:
+  - name: "DDI-E authors"
+# NOTE:
+# After paper publication, please update the preferred citation (journal, volume/issue, DOI).
+preferred-citation:
+  type: article
+  title: "DDI-E: A Conditional Diffusion Model for Probabilistic Reconstruction of Electrical Time Series under Random Missing Data"
+  authors:
+    - name: "DDI-E authors"
+  year: 2026
+  journal: "TBD"
+  doi: "TBD"
